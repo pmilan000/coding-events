@@ -1,5 +1,6 @@
 package org.launchcode.codingevents.controllers;
 
+import org.launchcode.codingevents.models.EventType;
 import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
@@ -28,8 +29,8 @@ public class EventController {
 
     @PostMapping("create")
     public String createEvent(@RequestParam String eventName, @RequestParam String eventDescription,
-                              @RequestParam String eventLocation) {
-        EventData.add(new Event(eventName, eventDescription, eventLocation));
+                              @RequestParam String eventLocation, @RequestParam EventType eventType) {
+        EventData.add(new Event(eventName, eventDescription, eventLocation, eventType));
         return "redirect:";
     }
     @GetMapping("remove")

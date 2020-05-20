@@ -10,10 +10,13 @@ public class Event {
     private String description;
     private String location;
 
-    public Event(String name, String description, String location) {
+    private EventType type;
+
+    public Event(String name, String description, String location, EventType type) {
         this.name = name;
         this.description = description;
         this.location = location;
+        this.type = type;
         this.id = nextId;
         nextId++;
     }
@@ -43,6 +46,14 @@ public class Event {
     }
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public EventType getType() {
+        return type;
+    }
+
+    public void setType(EventType type) {
+        this.type = type;
     }
 
     @Override
