@@ -1,29 +1,41 @@
 package org.launchcode.codingevents.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
+@Entity
 public class Event {
-    private int id;
-    private static int nextId = 1;
 
+    @Id
+    @GeneratedValue
+    private int id;
+
+    @NotBlank(message = "Name is required")
+    @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
     private String name;
+
+    @Size(max = 500, message = "Description too long!")
     private String description;
-    private String location;
+
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email. Try again.")
+    private String contactEmail;
 
     private EventType type;
 
-    public Event(String name, String description, String location, EventType type) {
+    public Event(String name, String description, String contactEmail, EventType type) {
         this.name = name;
         this.description = description;
-        this.location = location;
+        this.contactEmail = contactEmail;
         this.type = type;
-        this.id = nextId;
-        nextId++;
     }
 
-    public int getId() {
-        return id;
-    }
+    public Event() {}
 
     public String getName() {
         return name;
@@ -41,11 +53,12 @@ public class Event {
         this.description = description;
     }
 
-    public String getLocation() {
-        return location;
+    public String getContactEmail() {
+        return contactEmail;
     }
-    public void setLocation(String location) {
-        this.location = location;
+
+    public void setContactEmail(String contactEmail) {
+        this.contactEmail = contactEmail;
     }
 
     public EventType getType() {
@@ -54,6 +67,10 @@ public class Event {
 
     public void setType(EventType type) {
         this.type = type;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override
